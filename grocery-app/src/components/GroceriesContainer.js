@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import update from "immutability-helper";
+import "../App.css";
 
 class GroceriesContainer extends Component {
   constructor(props) {
@@ -62,6 +63,21 @@ class GroceriesContainer extends Component {
       .catch((error) => console.log(error));
   };
 
+  deleteGrocery = (id) => {
+    axios
+      .delete(`/api/v1/groceries/${id}`)
+      .then((response) => {
+        const groceryIndex = this.state.groceries.findIndex((x) => x.id === id);
+        const groceries = update(this.state.groceries, {
+          $splice: [[groceryIndex, 1]],
+        });
+        this.setState({
+          groceries: groceries,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   render() {
     return (
       <div>
@@ -88,7 +104,12 @@ class GroceriesContainer extends Component {
                     onChange={(e) => this.updateGrocery(e, grocery.id)}
                   />
                   <label className="groceryLabel">{grocery.title}</label>
-                  <span className="deleteGroceryBtn">x</span>
+                  <span
+                    className="deleteGroceryBtn"
+                    onClick={(e) => this.deleteGrocery(grocery.id)}
+                  >
+                    &nbsp; x
+                  </span>
                 </li>
               );
             })}

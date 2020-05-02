@@ -91,7 +91,7 @@ input[placeholder] {
   overflow: auto;
 }
 
-.deletegroceryBtn {
+.deleteGroceryBtn {
   float: right;
   color: red;
   background: rgba(0, 0, 0, 0);
