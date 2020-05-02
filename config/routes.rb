@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'groceries/index'
-  get 'groceries/create'
-  get 'groceries/update'
-  get 'groceries/destroy'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+ scope '/api/v1' do
+    resources :groceries
+ end
 end
