@@ -1,2 +1,2 @@
-web: npm --cwd grocery-app start
+web: --cwd grocery-app start
 api: bundle exec rails server
