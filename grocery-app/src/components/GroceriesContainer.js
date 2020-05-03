@@ -26,7 +26,8 @@ class GroceriesContainer extends Component {
   }
 
   createGrocery = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && this.state.inputValue !== "") {
+      console.log(e.key);
       axios
         .post("/api/v1/groceries", { grocery: { title: e.target.value } })
         .then((response) => {
@@ -86,7 +87,6 @@ class GroceriesContainer extends Component {
             className="groceryInput"
             type="text"
             placeholder="Add an item"
-            maxLength="50"
             onKeyPress={this.createGrocery}
             value={this.state.inputValue}
             onChange={this.handleChange}
@@ -106,7 +106,7 @@ class GroceriesContainer extends Component {
                   <label className="groceryLabel">{grocery.title}</label>
                   <span
                     className="deleteGroceryBtn"
-                    onClick={(e) => this.deleteGrocery(grocery.id)}
+                    onClick={(e) => this.deleteGrocery(e, grocery.id)}
                   >
                     &nbsp; x
                   </span>
