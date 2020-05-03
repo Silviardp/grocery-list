@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3000",
   "engines": {
-    "yarn": "1.22.0"
+    "npm": "6.13.4"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
