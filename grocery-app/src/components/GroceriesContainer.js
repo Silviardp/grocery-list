@@ -64,6 +64,19 @@ class GroceriesContainer extends Component {
       .catch((error) => console.log(error));
   };
 
+  editGrocery = (e, id) => {
+    axios
+      .post(`/api/v1/groceries/${id}`, { grocery: { title: e.target.value } })
+      .then((response) => {
+        const groceries = update(this.state.groceries, {
+          $splice: [[0, 0, response.data]],
+        this.setState({
+          groceries: groceries,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   deleteGrocery = (id) => {
     axios
       .delete(`/api/v1/groceries/${id}`)
@@ -102,11 +115,12 @@ class GroceriesContainer extends Component {
                     type="checkbox"
                     checked={grocery.done}
                     onChange={(e) => this.updateGrocery(e, grocery.id)}
+                    onClick={(e) => this.editGrocery(e, grocery.id)}
                   />
                   <label className="groceryLabel">{grocery.title}</label>
                   <span
                     className="deleteGroceryBtn"
-                    onClick={(e) => this.deleteGrocery(e, grocery.id)}
+                    onClick={(e) => this.deleteGrocery(grocery.id)}
                   >
                     &nbsp; x
                   </span>
